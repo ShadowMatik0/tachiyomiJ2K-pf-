@@ -68,6 +68,8 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
+BUILD_TOOLS_VERSION: "34.0.0" 
+
       - name: Clean up build artifacts
         if: env.VERSION_TAG != ''
         run: |
