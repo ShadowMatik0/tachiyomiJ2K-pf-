@@ -58,7 +58,7 @@ jobs:
           set -x
           echo "VERSION_TAG=${{github.event.inputs.version}}" >> $GITHUB_ENV
 
-      - name: Sign APK
+            - name: Sign APK
         if: env.VERSION_TAG != ''
         uses: r0adkll/sign-android-release@v1
         with:
@@ -67,8 +67,10 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          # Эта строка заставит экшен искать zipalign и apksigner в папке 34.0.0
+          BUILD_TOOLS_VERSION: "34.0.0" 
 
-BUILD_TOOLS_VERSION: "34.0.0" 
 
       - name: Clean up build artifacts
         if: env.VERSION_TAG != ''
